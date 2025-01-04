@@ -1,16 +1,26 @@
+import typing
 def filter_by_state(data_list: list[dict], state="EXECUTED") -> list[dict]:
     """Функция filter_by_state принимает список словарей и опционально значение для ключа state
     и возвращает новый список словарей, содержащий только те словари,
     у которых ключ state соответствует указанному значению"""
-    return [i for i in data_list if i["state"] == state]
+    if state:
+        return [i for i in data_list if i["state"] == state]
+    raise TypeError("Нет такого state в списке словарей")
 
 
-def sort_by_date(data_list: list[dict], revers=True) -> list[dict]:
+def sort_by_date(datе_list: list[dict], revers:bool=True) -> list[dict]:
     """функцию sort_by_date принимает список словарей и необязательный параметр,
     задающий порядок сортировки (по умолчанию — убывание).
     Функция возвращает новый список, отсортированный по дате (date)"""
+    if not datе_list:
+        raise ValueError("Данные не введены")
+    else:
+        for i in datе_list:
+            if i["date"]:
+                sorted_date = sorted(datе_list, key=lambda x: x["date"], reverse=revers)
+                return sorted_date
 
-    return sorted(data_list, key=lambda x: x["date"], reverse=revers)
+            raise TypeError("Неправильный формат даты")
 
 
 print(
@@ -33,7 +43,7 @@ print(
                 "date": "2018-10-14T08:21:33.419441",
             },
         ],
-        "CANCELED",
+        "EXECUTED",
     )
 )
 
