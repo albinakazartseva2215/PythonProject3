@@ -6,12 +6,13 @@ def filter_by_currency(transactions: list[dict], currency: str) -> Iterator[dict
     """функция filter_by_currency, которая принимает на вход список словарей, представляющих транзакции.
     Функция должна возвращать итератор, который поочередно выдает транзакции, где валюта операции
     соответствует заданной (например, USD)."""
-    list_of_currency = (c for c in transactions if c["operationAmount"]["currency"]["code"] == currency)
-    for result in list_of_currency:
-        yield result
-
-    if list_of_currency:
-        yield "Нет данных"
+    if transactions:
+        list_of_currency = (c for c in transactions if c["operationAmount"]["currency"]["code"] == currency)
+        if list_of_currency:
+            return list_of_currency
+        else:
+            return iter([])
+    return iter([])
 
 
 def transaction_descriptions(transactions: list[dict]) -> Iterator[str]:
@@ -21,8 +22,8 @@ def transaction_descriptions(transactions: list[dict]) -> Iterator[str]:
         for c in transactions:
             yield c["description"]
 
-    else:
-        return iter([])
+
+    yield iter([])
 
 
 def card_number_generator(start_number: int, end_number: int) -> Iterator[str]:
@@ -30,12 +31,15 @@ def card_number_generator(start_number: int, end_number: int) -> Iterator[str]:
     X — цифра номера карты. Генератор может сгенерировать номера карт в заданном диапазоне
     от 0000 0000 0000 0001 до 9999 9999 9999 9999.
     Генератор должен принимать начальное и конечное значения для генерации диапазона номеров."""
-    if start_number and end_number:
+    if start_number >= 1 and end_number <= 9999999999999999:
         for i in range(start_number, end_number):
             card_number = str(i)
             while len(card_number) < 16:
                 card_number = "0" + card_number
             yield f"{card_number[0:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:16]}"
+
+    else:
+        yield iter([])
 
 
 if __name__ == "__main__":
