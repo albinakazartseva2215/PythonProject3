@@ -8,10 +8,7 @@ def filter_by_currency(transactions: list[dict], currency: str) -> Iterator[dict
     соответствует заданной (например, USD)."""
     if transactions:
         list_of_currency = (c for c in transactions if c["operationAmount"]["currency"]["code"] == currency)
-        if list_of_currency:
-            return list_of_currency
-        else:
-            return iter([])
+        return list_of_currency
     return iter([])
 
 
@@ -43,8 +40,7 @@ def card_number_generator(start_number: int, end_number: int) -> Iterator[str]:
 
 
 if __name__ == "__main__":
-    transactions = [
-        {
+    transactions = [{
             "id": 939719570,
             "state": "EXECUTED",
             "date": "2018-06-30T02:08:58.425572",
