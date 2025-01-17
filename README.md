@@ -11,13 +11,14 @@
 python processing.py
 python widget.py
 python masks.py
+python generators.py
 ```
 
 ## Использование
 1. Перейдите на страницу в GitHub.
 2. Создайте новую учетную запись или войдите в существующий.
 3. Перенести проект в локальный репозиторий.
-4. Откройте processing.py, masks.py, widget.py и внесите свои данные для обработки.
+4. Откройте processing.py, masks.py, widget.py, generators.py и внесите свои данные для обработки.
 
 
 # Тестирование
@@ -28,6 +29,7 @@ python masks.py
 python test_processing.py
 python test_widget.py
 python test_masks.py
+python test_generators.py
 ```
 
 ## Документация
