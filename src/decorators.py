@@ -2,7 +2,7 @@ import typing
 from functools import wraps
 
 
-def log(filename=None):
+def log(filename: object) -> object:
     """Декоратор, который будет автоматически логировать начало и конец выполнения функции, а также ее результаты
     или возникшие ошибки. Декоратор должен принимать необязательный аргумент filename, который определяет,
     куда будут записываться логи (в файл или в консоль):"""
@@ -40,7 +40,7 @@ def log(filename=None):
     return my_decorator
 
 
-@log(filename=None)
+@log(filename="mylog.txt")
 def my_function(x: int | float, y: int | float) -> int | float:
     """Функция принимает числа типа int и float и возвращает сумму чисел"""
 
