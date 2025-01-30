@@ -13,17 +13,21 @@ python widget.py
 python masks.py
 python generators.py
 python decorators.py
+python utils.py
+python external_api.py
+python transactions.py
 ```
 
 ## Использование
 1. Перейдите на страницу в GitHub.
 2. Создайте новую учетную запись или войдите в существующий.
 3. Перенести проект в локальный репозиторий.
-4. Откройте processing.py, masks.py, widget.py, generators.py, decorators.py и внесите свои данные для обработки данных.
+4. Откройте модули processing.py, masks.py, widget.py, generators.py, decorators.py, utils.py, transactions.py, 
+   external_api.py и внесите свои данные для обработки данных.
 
 
 # Тестирование
-- [клонируйте репозиторий](https://github.com/albinakazartseva2215/PythonProject2.git)
+- [клонируйте репозиторий](https://github.com/albinakazartseva2215/PythonProject3.git)
 
 - запустите файлы для тестирования модулей
 ```
@@ -32,6 +36,7 @@ python test_widget.py
 python test_masks.py
 python test_generators.py
 python test_decorators.py
+python test_transactions.py
 ```
 
 ## Документация
