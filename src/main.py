@@ -1,14 +1,8 @@
-import re
-
-from src.transactions import read_transactions_from_csv, read_transactions_from_excel
-
-from src.widget import mask_account_card, get_date
-
-from src.utils import get_path_to_file
-
 from src.processing import sort_by_date
-
-from src.search import get_transactions, get_category
+from src.search import get_transactions
+from src.transactions import read_transactions_from_csv, read_transactions_from_excel
+from src.utils import get_path_to_file
+from src.widget import get_date, mask_account_card
 
 result_json = get_path_to_file("../data/operations.json")
 result_csv = read_transactions_from_csv("../src/transactions.csv")
@@ -16,6 +10,7 @@ result_excel = read_transactions_from_excel("../src/transactions_excel.xlsx")
 
 
 def choice_file(input_file):
+    """Функция предназначена для выбора файла"""
     if input_file:
         if input_file == "1":
             result_file = result_json
@@ -32,7 +27,9 @@ def choice_file(input_file):
             print("Для обработки выбран EXCEL-файл")
             return result_file
 
+
 def get_revers_date(choice_category, input_sort_date, input_revers_date):
+    """Функция предназначена для фильтрации данных по дате (возрастание или убывание)"""
     if input_sort_date:
         if input_revers_date == "ПО ВОЗРАСТАНИЮ":
             result_date_revers = sort_by_date(choice_category, revers=False)
@@ -40,7 +37,10 @@ def get_revers_date(choice_category, input_sort_date, input_revers_date):
         elif input_revers_date == "ПО УБЫВАНИЮ":
             result_date_revers = sort_by_date(choice_category, revers=True)
             return result_date_revers
+
+
 def filter_rub(filter_revers_date, input_filter_rub):
+    """Функция предназначена для фильтрации данных по RUB"""
     if input_filter_rub == "ДА":
         result = get_transactions(filter_revers_date, "RUB")
         return result
@@ -48,7 +48,9 @@ def filter_rub(filter_revers_date, input_filter_rub):
         result = filter_revers_date
         return result
 
+
 def filter_word(filter_revers_date, input_filter_word):
+    """Функция предназначена для фильтрации данных по любому слову"""
     if input_filter_word == "ДА":
         input_word = input("Ведите слово для фильтрации\n")
         result = get_transactions(filter_revers_date, input_word)
@@ -58,7 +60,7 @@ def filter_word(filter_revers_date, input_filter_word):
 
 
 def get_result(result_transaction: list) -> None:
-    """Вычисление и вывод результатов по полученному списку транзакций"""
+    """Вывод результатов по отфильтрованному списку транзакций"""
     if len(result_transaction) == 0:
         print("Нет ни одной транзакции")
     else:
@@ -87,20 +89,25 @@ def get_result(result_transaction: list) -> None:
             print(f"{card_to_mask} Сумма: {amount} {currency}")
 
 
-list_of_status = ["EXECUTED", "CANCELED", "PENDING"]
-
-
 def main():
-    input_file = (input("""Привет! Добро пожаловать в программу работы с банковскими транзакциями.\n
+    input_file = (
+        input(
+            """Привет! Добро пожаловать в программу работы с банковскими транзакциями.\n
                             Выберите необходимый пункт меню:\n
                             1. Получить информацию о транзакциях из JSON-файла\n
                             2. Получить информацию о транзакциях из CSV-файла\n
-                            3. Получить информацию о транзакциях из XLSX-файла\n""")).upper()
+                            3. Получить информацию о транзакциях из XLSX-файла\n"""
+        )
+    ).upper()
 
     result_file = choice_file(input_file)
 
-    input_status = (input("""Введите статус, по которому необходимо выполнить фильтрацию.
-                            Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING\n""")).upper()
+    input_status = (
+        input(
+            """Введите статус, по которому необходимо выполнить фильтрацию.
+                            Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING\n"""
+        )
+    ).upper()
 
     choice_category = get_transactions(result_file, input_status)
 
