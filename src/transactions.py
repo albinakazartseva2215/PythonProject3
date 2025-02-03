@@ -2,6 +2,8 @@ import csv
 
 import pandas as pd
 
+import re
+
 
 def read_transactions_from_csv(path_to_file_csv: str) -> list[dict]:
     """Функция для считывания финансовых операций из CSV выдает список словарей с транзакциями"""
@@ -24,5 +26,7 @@ def read_transactions_from_excel(path_to_file_excel: str) -> list[dict]:
 
 
 if __name__ == "__main__":
-    print(read_transactions_from_csv("../src/transactions.csv"))
-    print(read_transactions_from_excel("../src/transactions_excel.xlsx"))
+    result_csv = read_transactions_from_csv("../src/transactions.csv")
+    print(result_csv)
+    result_excel = read_transactions_from_excel("../src/transactions_excel.xlsx")
+    print(result_excel)

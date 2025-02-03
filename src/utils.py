@@ -32,5 +32,6 @@ def get_path_to_file(path_to_file: str) -> list[dict]:
 
 
 if __name__ == "__main__":
-    print(get_path_to_file("../data/operations.json"))
+    result_json = get_path_to_file("../data/operations.json")
+    print(result_json)
     utils_loger.debug("Работа программы завершена")

@@ -16,6 +16,8 @@ python decorators.py
 python utils.py
 python external_api.py
 python transactions.py
+python search.py
+python main,py
 ```
 
 ## Использование
@@ -37,6 +39,7 @@ python test_masks.py
 python test_generators.py
 python test_decorators.py
 python test_transactions.py
+python test_search.py
 ```
 
 ## Документация
